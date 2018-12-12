@@ -6,4 +6,5 @@ urlpatterns = [
     path('', views.all),
     #单个帖子
     path('<int:id>/', views.one),
+    path('new/',views.creat),
 ]

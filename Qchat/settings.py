@@ -126,3 +126,5 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
+
+SESSION_COOKIE_NAME = "sid"       # Session的cookie保存在浏览器上时的key

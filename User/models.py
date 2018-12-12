@@ -11,11 +11,11 @@ class User(models.Model):
     #密码hash
     password=models.CharField(max_length=32)
     #学号
-    snum=models.IntegerField()
+    snum=models.IntegerField(default=0)
     #是否通过教务认证
     checked=models.BooleanField(default=False)
     #绑定的QQ
-    QQ=models.IntegerField()
+    QQ=models.IntegerField(default=0)
     #性别
     sex=models.CharField(max_length=2,choices=AllSex,default="未知")
     #禁言恢复时间(UNIX)

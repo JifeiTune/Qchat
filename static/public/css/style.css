@@ -1111,7 +1111,7 @@ body,input,button,textarea,select {
     border: 2px solid #CCD4D9;
     border-radius: 2px;
     padding: 4px 4px 0px ;
-    margin: 0px 0px 30px ;
+    margin: 0px 0px 25px ;
     background-color: #FFF;
     position: relative;
     z-index: 10;
@@ -1210,11 +1210,8 @@ body,input,button,textarea,select {
 }
 
 #comment-submit {
-    position: absolute;
-    right: -2px;
-    bottom: -2px;
+    float: right;
     background: #3399CC;
-    border: none;
     border: 2px solid;
     border-color: #3399CC;
     border-left: none;

@@ -21,7 +21,7 @@ class Post(models.Model):
     #浏览数
     readNum=models.IntegerField(default=0)
     def __str__(self):
-        return 'User: '+self.head[0:10]+"……"
+        return str(self.userId)+"    "+self.head[0:10]+"……"
 
 #帖子的赞与踩
 class JudgeOfPost(models.Model):
@@ -36,6 +36,8 @@ class JudgeOfPost(models.Model):
 class Reply(models.Model):
     #回复ID
     replyId=models.AutoField(primary_key=True)
+    #所在帖子
+    postId=models.ForeignKey(to="Post",to_field="postId",on_delete=models.CASCADE,related_name="post")
     #发送者ID，外键
     userId = models.ForeignKey(to="User.User", to_field="userId", on_delete=models.DO_NOTHING,related_name="Mfrom")
     #接收者ID，外键
@@ -52,7 +54,7 @@ class Reply(models.Model):
     readNum = models.IntegerField(default=0)
 
     def __str__(self):
-        return 'User: '+self.content[0:10]+"……"
+        return str(self.userId)+"    "+self.content[0:10]+"……"
 
 #回复的赞与踩
 class JudgeOfReply(models.Model):
@@ -62,12 +64,3 @@ class JudgeOfReply(models.Model):
     userId = models.ForeignKey(to="User.User", to_field="userId", on_delete=models.CASCADE)
     #是否是赞（否则是踩）
     isPr=models.BooleanField(default=True)
-
-#帖子与回复的关联
-class ReplyOfPost(models.Model):
-    postId=models.ForeignKey(to="Post",to_field="postId",on_delete=models.CASCADE,related_name="post")
-    replyId=models.ForeignKey(to="Reply",to_field="replyId",on_delete=models.CASCADE,related_name="reply")
-
-    def __str__(self):
-        return 'Post: '+str(self.postId)+", Reply: "+str(self.replyId)
-

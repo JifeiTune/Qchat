@@ -28,10 +28,10 @@
     <nav class="navbar navbar-default" id="navbar" style="position: relative; top: 0px;">
         <div class="container">
             <div class="navbar-header">
-                <h1 class="logo hvr-bounce-in"><a href="#" title="主页"><img src="/static/public/img/QQ.png" alt="主页" /></a></h1>
+                <h1 class="logo hvr-bounce-in"><a href="../" title="主页"><img src="/static/public/img/QQ.png" alt="主页" /></a></h1>
             </div>
             <ul class="nav navbar-nav navbar-right" style="background-color: #ffffff6b;">
-                <li><a title="我的" style="height: 50px" href="https://www.baidu.com/">我的</a></li>
+                <li><a  style="height: 50px" href="/user/set">{{ info.uname }}</a></li>
             </ul>
         </div>
     </nav>
@@ -92,19 +92,9 @@
             <form id="comment-form" name="comment-form" action="" method="POST">
                 <div class="comment">
                     <div class="comment-box">
-                        <textarea placeholder="您的评论" name="comment-textarea" id="comment-textarea" cols="100%" rows="3" tabindex="3"></textarea>
-                        <div class="comment-ctrl">
-                            <div class="comment-prompt" style="display: none;">
-                                <i class="fa fa-spin fa-circle-o-notch"></i>
-                                <span class="comment-prompt-text">评论正在提交中...请稍后</span>
-                            </div>
-                            <div class="comment-success" style="display: none;">
-                                <i class="fa fa-check"></i>
-                                <span class="comment-prompt-text">评论提交成功...</span>
-                            </div>
-                            <button type="submit" name="comment-submit" id="comment-submit" tabindex="4">评论 </button>
-                        </div>
+                        <textarea placeholder="您的评论" name="content" id="comment-textarea" cols="100%" rows="3" tabindex="3"></textarea>
                     </div>
+                    <button type="submit" id="comment-submit" tabindex="4" style="float: none;margin: -10px 0 25px 658px">发布 </button>
                 </div>
             </form>
         </div>

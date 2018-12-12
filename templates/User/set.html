@@ -1,10 +1,81 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh_Hans">
 <head>
-    <meta charset="UTF-8">
-    <title>$Title$</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>账号设置</title>
+    <link rel="stylesheet" type="text/css" href="/static/public/css/base.css" />
+    <link rel="stylesheet" type="text/css" href="/static/public/css/forms.css" />
+    <meta name="viewport" content="user-scalable=no, width=device-width, initial-scale=1.0, maximum-scale=1.0" />
+    <meta name="robots" content="NONE,NOARCHIVE" />
 </head>
-<body>
-$END$
+<body class=" app-User model-user change-form" data-admin-utc-offset="28800">
+<!-- Container -->
+<div id="container">
+    <!-- Header -->
+    <div id="header">
+        <div id="branding">
+            <h1 id="site-name"><a href="/all">返回</a></h1>
+        </div>
+    </div>
+    <!-- END Header -->
+    <!-- Content -->
+    <div id="content" class="colM">
+        <h1>个人信息</h1>
+        <div id="content-main">
+            <form action="/user/set/" method="post">
+                <div>
+                    <fieldset class="module aligned ">
+                        <div class="form-row field-uname">
+                            <div>
+                                <label class="required" for="id_uname">用户名:</label>
+                                <input disabled="disabled" value="{{ data.uname }}" class="vTextField" maxlength="10" required="" id="id_uname" />
+                            </div>
+                        </div>
+                        <div class="form-row field-snum">
+                            <div>
+                                <label class="required" for="id_snum">学号:</label>
+                                <input disabled="disabled" value="{{ data.snum }}" class="vIntegerField" required="" id="id_snum" />
+                            </div>
+                        </div>
+                        <div class="form-row field-checked">
+                            <div class="checkbox-row" style="float: left">
+                                <input type="checkbox" disabled="disabled" {{ data.checked }} id="id_checked" />
+                                <label class="vCheckboxLabel" for="id_checked" >已通过教务认证</label>
+                            </div>
+                            <a class="check" href="../check" style="float: left;display: {{ data.checkDisplay }}">
+                                前往认证
+                            </a>
+                        </div>
+                        <div class="form-row field-QQ">
+                            <div>
+                                <label class="required" for="id_QQ">绑定QQ:</label>
+                                <input type="number" name="QQ" value="{{ data.QQ }}" class="vIntegerField" required="" id="id_QQ" />
+                            </div>
+                        </div>
+                        <div class="form-row field-sex">
+                            <div>
+                                <label class="required" for="id_sex">性别:</label>
+                                <select name="sex" id="id_sex">
+                                    <option value="男" {{ data.man }}>男性</option>
+                                    <option value="女" {{ data.woman }}>女性</option>
+                                    <option value="未知" {{ data.unknown }}>性别未知</option>
+                                </select>
+                            </div>
+                        </div>
+                    </fieldset>
+                    <div class="submit-row">
+                        <input type="submit" value="保存并更新" class="default" style="float: left"/>
+                        <input type="button" value="退出登录" onclick="window.location='../logout'" class="default" style="background-color:#c90000"/>
+                        <input type="button" value="修改密码" onclick="window.location='../reset'" class="default" />
+                    </div>
+                </div>
+            </form>
+        </div>
+        <br class="clear" />
+    </div>
+    <!-- END Content -->
+    <div id="footer"></div>
+</div>
+<!-- END Container -->
 </body>
 </html>
