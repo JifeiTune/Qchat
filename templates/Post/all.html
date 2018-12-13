@@ -10,6 +10,7 @@
     <link rel="stylesheet" type="text/css" href="/static/public/css/nprogress.css">
     <link rel="stylesheet" type="text/css" href="/static/public/css/style.css">
     <link rel="stylesheet" type="text/css" href="/static/public/css/font-awesome.min.css">
+    <link rel="stylesheet" href="/static/kanban/css/live2d.css" />
     <script src="/static/public/js/jquery-2.1.4.min.js"></script>
     <script src="/static/public/js/nprogress.js"></script>
     <script src="/static/public/js/jquery.lazyload.min.js"></script>
@@ -115,6 +116,21 @@
     </div>
     <div id="gotop" style="display: none;"><a class="gotop"></a></div>
 </footer>
+
+<div id="landlord">
+    <div class="message" style="opacity:1"></div>
+    <canvas id="live2d" width="280" height="250" class="live2d"></canvas>
+</div>
+<script type="text/javascript">
+    var message_Path = '/static/kanban/';
+    var home_Path = '/'
+</script>
+<script type="text/javascript" src="/static/kanban/js/live2d.js"></script>
+<script type="text/javascript" src="/static/kanban/js/message.js"></script>
+<script type="text/javascript">
+    loadlive2d("live2d", "/static/kanban/model/Pio/model.json")
+</script>
+
 <script src="/static/public/js/bootstrap.min.js"></script>
 <script src="/static/public/js/jquery.ias.js"></script>
 <script src="/static/public/js/scripts.js"></script>

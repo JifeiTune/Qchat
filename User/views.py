@@ -56,7 +56,12 @@ def register(request):
         return render(request,'User/resister.html')
     #登录部分的提交
 
-
+#修改密码
+def reset(request):
+    if(request.method=="POST"):
+        return HttpResponse("1")
+    else:
+        return render(request,'User/reset.html')
 
 #找回密码
 def forget(request):
@@ -151,9 +156,3 @@ def logOut(request):
     del request.session["uname"]
     return HttpResponseRedirect("/all")
 
-#修改密码
-def reset(request):
-    if(request.method=="POST"):
-        return HttpResponse("1")
-    else:
-        return render(request,'User/reset.html')

@@ -9,12 +9,11 @@ from datetime import datetime
 from django.db import connection
 import time
 import requests
+from System.views import send
 
 MAX=20#一页最多显示多少条帖子
 Num=len(Post.objects.all())#帖子总数，懒得每次都去查，设为全局变量
 sexF={"男":"#3399CC","女":"#ff37af","未知":"#aeaeae"}
-sendUrl="http://47.106.69.127:10086/send_private_msg?"
-
 
 #一个帖子所需字典数据
 def postDic(uname,sex,crtime,head,content,prNum,ctrNum,repNum,postId):
@@ -123,8 +122,7 @@ def one(request,id):
                 "回复内容：%s\n" \
                 "快去看看吧！\n" \
                 "http://127.0.0.1:8000/all/%s" % (uobj.uname,content,id)
-        data=requests.get(sendUrl+"user_id="+str(QQ)+"&message="+message)
-        print(data.content)
+        send(QQ,message)#向接收者QQ发送数据
 
     post=getPostById(id)
     if(len(post)==0):
