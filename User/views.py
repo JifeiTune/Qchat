@@ -7,6 +7,9 @@ from .models import User
 from django.http import Http404
 from django.db import connection
 import base64
+import random
+import time
+from System.views import send
 
 def hash(string):
     string=string.encode(encoding='UTF-8')
@@ -41,12 +44,15 @@ def register(request):
         uname=request.POST.get("uname")
         password1=request.POST.get("password1")
         password2=request.POST.get("password2")
+        QQ=request.POST.get("QQ")
         if(password1!=password2):
             return HttpResponse("两次密码不一致！")
+        if(uname=="" or password1=="" or QQ==""):
+            return HttpResponse("消息不能为空哦！")
         if(len(User.objects.filter(uname=uname))):
             return HttpResponse("用户名已存在！")
         password1=hash(password1)#存hash
-        uobj=User(uname=uname,password=password1)
+        uobj=User(uname=uname,password=password1,QQ=QQ)
         uobj.save()
         request.session["uid"]=uobj.userId
         request.session["uname"]=uname
@@ -56,20 +62,38 @@ def register(request):
         return render(request,'User/resister.html')
     #登录部分的提交
 
-#修改密码
+#修改密码，输入QQ机器人发给绑定的QQ的验证码后即可修改
 def reset(request):
+    uid=request.session.get("uid")
+    uobj=User.objects.get(userId=uid)
+    if(uid==None):#若未登录，跳转到登录界面
+        return HttpResponseRedirect("../login/")
+
     if(request.method=="POST"):
-        return HttpResponse("1")
+        password1=request.POST.get("password1")
+        password2=request.POST.get("password2")
+        check=request.POST.get("check")
+        if(check!=request.session["check"]):
+            return HttpResponse("验证码错误（60秒后可重新获取一次哦）！")
+        else:
+            if(password1==""):
+                return HttpResponse("密码为空！")
+            if(password1!=password2):
+                return HttpResponse("两次密码不一致！")
+            uobj.password=hash(password1)
+            uobj.save()
+            return HttpResponseRedirect("/all")
     else:
+        last=request.session.get("last")
+        #最多每分钟获取一次验证码
+        if((last!=None and time.time()-last>60) or last==None):
+            check="".join(random.sample('ABCDEFGHIJKLMNOPQRSTUVWXYZ',6))
+            #验证码和生成的时间写入session
+            request.session["last"]=int(time.time())
+            request.session["check"]=check
+            message="小主的正在修改密码，验证码是"+check+"\n60秒后可重新获取一次哦（需刷新页面）"
+            send(uobj.QQ,message)
         return render(request,'User/reset.html')
-
-#找回密码
-def forget(request):
-    if(request.method=="POST"):
-        return HttpResponse("1")
-    else:
-        return render(request,'User/forget.html')
-
 
 #教务认证
 def check(request):

@@ -11,7 +11,7 @@
 
 <div id="particles-js" style="background-image: url(/static/public/img/bg.jpg);">
 		<div class="login">
-			<div class="login-top">
+			<div class="login-top" style="margin-top: 70px">
 				注册
 			</div>
             <form action="/user/register/" method="post">
@@ -34,6 +34,13 @@
                     <div class="login-center-input">
                         <input type="password" name="password2" value="" placeholder="请确认密码" onfocus="this.placeholder=''" onblur="this.placeholder='请确认密码'"/>
                         <div class="login-center-input-text">密码</div>
+                    </div>
+                </div>
+                <div class="login-center clearfix ">
+                    <div class="login-center-img"><img src="/static/User/img/QQ.png"/></div>
+                    <div class="login-center-input">
+                        <input type="text" name="QQ" value="" placeholder="请输入QQ" onfocus="this.placeholder=''" onblur="this.placeholder='请输入QQ'"/>
+                        <div class="login-center-input-text">可用于修改密码和消息传递哦</div>
                     </div>
                 </div>
                 <input class="login-button" type="submit" value="注册" >
